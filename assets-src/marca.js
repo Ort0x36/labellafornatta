@@ -6,7 +6,7 @@ var LBF = (function () {
     cacau: "#532E25",   // marrom do logo atual (medido no avatar do Instagram)
     cacauD: "#3B201A",  // seções escuras
     cobre: "#D6A283",   // traço do chef e subtítulo (rosé cobre do logo)
-    cobreD: "#9C5B3B",  // cobre para texto sobre fundo claro
+    cobreD: "#8E4F31",  // cobre para texto sobre fundo claro (contraste AA: 5,9 no fundo, 5,0 na bandeja)
     creme: "#F6EBDD",   // letra do logo
     farinha: "#FBF6EE", // fundo do site
     massa: "#F0E3D0",   // bandejas e cartões

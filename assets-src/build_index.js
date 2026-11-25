@@ -80,12 +80,16 @@ const html = `<!DOCTYPE html>
 <meta name="twitter:image" content="${SITE}og-image.png">
 <meta name="theme-color" content="${C.cacau}">
 <link rel="icon" href="data:image/svg+xml,${encodeURIComponent(LBF.badge('xmlns="http://www.w3.org/2000/svg"'))}">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Jost:ital,wght@0,400;0,500;0,600;1,400&family=Sacramento&display=swap" rel="stylesheet">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Bakery","name":"La Bella Fornatta","description":"Padaria e restaurante","servesCuisine":["Padaria","Brasileira"],"priceRange":"R$ 20-40","address":{"@type":"PostalAddress","streetAddress":"R. Clarisse de Jesus Lázaro Bedeschi, 231A","addressLocality":"Mauá","addressRegion":"SP","postalCode":"09371-067","addressCountry":"BR"},"telephone":"+55-11-2375-9892","openingHours":"Mo-Su 06:30-21:30","sameAs":["https://www.instagram.com/labellafornatta"]}</script>
+<link rel="preload" href="fonts/jost.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/dm-serif-display.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/dm-serif-display-italic.woff2" as="font" type="font/woff2" crossorigin>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Bakery","name":"La Bella Fornatta","description":"Padaria e restaurante","servesCuisine":["Padaria","Brasileira"],"priceRange":"R$ 20-40","address":{"@type":"PostalAddress","streetAddress":"R. Clarisse de Jesus Lázaro Bedeschi, 231A","addressLocality":"Mauá","addressRegion":"SP","postalCode":"09371-067","addressCountry":"BR"},"telephone":"+55-11-2375-9892","url":"${SITE}","image":"${SITE}og-image.png","logo":"${SITE}og-image.png","hasMap":"${MAPS}","menu":"${SITE}#cardapio","openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"06:30","closes":"21:30"}],"potentialAction":{"@type":"OrderAction","target":"${IFOOD}"},"sameAs":["https://www.instagram.com/labellafornatta","https://linktr.ee/labellafornatta"]}</script>
 <script>document.documentElement.classList.add("js")</script>
 <style>
+@font-face{font-family:Jost;font-style:normal;font-weight:400 600;font-display:swap;src:url(fonts/jost.woff2) format("woff2")}
+@font-face{font-family:"DM Serif Display";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/dm-serif-display.woff2) format("woff2")}
+@font-face{font-family:"DM Serif Display";font-style:italic;font-weight:400;font-display:swap;src:url(fonts/dm-serif-display-italic.woff2) format("woff2")}
+@font-face{font-family:Sacramento;font-style:normal;font-weight:400;font-display:swap;src:url(fonts/sacramento.woff2) format("woff2")}
 :root{color-scheme:light;
  --cacau:${C.cacau};--cacauD:${C.cacauD};--cobre:${C.cobre};--trigo:${C.trigo};--creme:${C.creme};
  --bg:${C.farinha};--massa:${C.massa};--card:#FFFDF9;--ink:#2B1A15;--muted:#6B564C;--line:#E6D6C2;--line2:#E2CFB8;--accent:${C.cobreD};--ok:#3F7A4A;--err:#B3261E;
@@ -206,7 +210,7 @@ header.sc{box-shadow:0 1px 0 var(--line),0 12px 26px -22px rgba(59,32,26,.6)}
 .chip-f i{width:7px;height:7px;border-radius:50%;background:var(--trigo)}
 @keyframes float{to{translate:0 -8px}}
 @media(max-width:920px){.hg{grid-template-columns:1fr}.stage{max-width:380px;margin-top:10px}.chip-f{font-size:.82rem}}
-@media(max-width:520px){.stage{width:88%}.seal-f{left:-4%;width:30%}.chip-f:nth-of-type(1){right:-6%!important}.chip-f:nth-of-type(2){right:-6%!important}.chip-f:nth-of-type(3){left:-6%!important}}
+@media(max-width:520px){.stage{width:88%}.seal-f{left:-4%;width:30%}.chip-f:nth-of-type(1){right:-6%!important}.chip-f:nth-of-type(2){right:-6%!important;top:63%!important}.chip-f:nth-of-type(3){left:-6%!important}}
 
 /* revelação ao rolar */
 html.js [data-rv]{opacity:0;translate:0 20px;transition:opacity .8s var(--ease),translate .8s var(--ease);transition-delay:calc(var(--i,0) * 90ms)}
@@ -291,7 +295,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);
 .seg label:has(input:checked){border-color:var(--accent);background:var(--massa)}
 .wn{font-size:.85rem;color:var(--muted)}
 .quick{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-.quick button{font:500 .88rem Jost;border:1px dashed var(--line2);border-color:var(--accent);background:transparent;color:var(--accent);border-radius:999px;padding:6px 12px;cursor:pointer;transition:.2s}
+.quick button{font:500 .9rem Jost;min-height:42px;border:1px dashed var(--accent);background:transparent;color:var(--accent);border-radius:999px;padding:6px 14px;cursor:pointer;transition:.2s}
 .quick button:hover{background:var(--massa)}
 
 /* avaliações */
@@ -319,7 +323,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);
 .info .ib{width:46px;height:46px;flex:none;border-radius:14px;background:var(--massa);display:grid;place-items:center;color:var(--accent)}
 .info b{display:block;font-weight:600}
 .info span{color:var(--muted)}
-.info a{color:var(--ink)}
+.info a{color:var(--ink);display:inline-block;padding:6px 0;margin:-6px 0}
 .week{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:8px;max-width:340px}
 .week i{font-style:normal;text-align:center;font-size:.78rem;font-weight:500;padding:5px 0;border-radius:8px;background:var(--massa);color:var(--muted)}
 .week i.today{background:var(--cacau);color:var(--creme)}
@@ -351,7 +355,9 @@ footer a{text-decoration:none;opacity:.9}footer a:hover{text-decoration:underlin
 @media(max-width:520px){.fg{grid-template-columns:1fr}}
 footer .logo{color:var(--creme)}footer .logo .nm small{color:var(--cobre)}
 footer p{color:#D8C3B2;font-size:.95rem;margin-top:14px;max-width:34ch}
-footer ul{list-style:none;padding:0;display:grid;gap:8px;font-size:.97rem}
+footer ul{list-style:none;padding:0;display:grid;gap:2px;font-size:.97rem}
+footer ul a{display:inline-block;padding:9px 0}footer ul li:not(:has(a)){padding:4px 0}
+.copy a{display:inline-block;padding:10px 0}
 footer h3{font:600 .8rem Jost;letter-spacing:.2em;text-transform:uppercase;color:var(--cobre);margin-bottom:14px}
 .copy{border-top:1px solid #5A3B31;margin-top:44px;padding-top:22px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:.88rem;color:#CDB7A6}
 .copy strong{color:var(--creme)}
@@ -362,7 +368,7 @@ footer h3{font:600 .8rem Jost;letter-spacing:.2em;text-transform:uppercase;color
 .mbar{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:30;display:none;gap:8px;padding:8px;background:color-mix(in srgb,var(--card) 92%,transparent);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:999px;box-shadow:var(--shadow-h);transform:translateY(140%);transition:transform .5s var(--ease)}
 .mbar.on{transform:none}
 .mbar .btn{flex:1;min-height:48px;padding:0 14px;font-size:.95rem}
-@media(max-width:720px){.mbar{display:flex}}
+@media(max-width:720px){.mbar{display:flex}footer{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}}
 
 .toast{position:fixed;left:50%;bottom:calc(90px + env(safe-area-inset-bottom,0px));translate:-50% 20px;background:var(--cacauD);color:var(--creme);padding:12px 20px;border-radius:999px;font-weight:500;box-shadow:var(--shadow-h);opacity:0;pointer-events:none;transition:.35s var(--ease);z-index:40;max-width:calc(100% - 32px);text-align:center}
 .toast.on{opacity:1;translate:-50% 0}
@@ -375,10 +381,10 @@ footer h3{font:600 .8rem Jost;letter-spacing:.2em;text-transform:uppercase;color
 <body>
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
 <header><div class="w nav">
- <a class="logo" href="#topo" aria-label="La Bella Fornatta, início">${LBF.badge('class="bd" aria-hidden="true"')}<span class="nm"><b>La Bella Fornatta</b><small>PADARIA &amp; RESTAURANTE</small></span></a>
+ <a class="logo" href="#topo">${LBF.badge('class="bd" aria-hidden="true"')}<span class="nm"><b>La Bella Fornatta</b><small>PADARIA &amp; RESTAURANTE</small></span></a>
  <button class="burger" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu"><span></span><span></span><span></span></button>
  <nav class="menu" id="menu" aria-label="Principal">
-  <a href="#dia">O dia</a><a href="#cardapio">Cardápio</a><a href="#buffet">Buffet</a><a href="#visite">Visite</a>
+  <a href="#cardapio">Cardápio</a><a href="#buffet">Buffet</a><a href="#avaliacoes">Avaliações</a><a href="#visite">Visite</a>
   <a class="btn bmain" href="#pedir">Fazer pedido</a>
  </nav>
 </div></header>
@@ -441,7 +447,7 @@ footer h3{font:600 .8rem Jost;letter-spacing:.2em;text-transform:uppercase;color
    <li><span class="n">2</span><span>Venha almoçar no salão ou peça pelo WhatsApp.</span></li>
    <li><span class="n">3</span><span>Termine com uma sobremesa da vitrine.</span></li>
   </ol>
-  <a class="btn bcobre" href="${INSTAGRAM}" target="_blank" rel="noopener">${ic("ig")}Ver o cardápio no Instagram</a>
+  <div class="ctas"><a class="btn bcobre" href="#pedir" data-wa="Olá! Qual é o buffet de hoje na La Bella Fornatta?">${WA}Perguntar o buffet de hoje</a><a class="btn bline" href="${INSTAGRAM}" target="_blank" rel="noopener">${ic("ig")}Ver no Instagram</a></div>
  </div>
  <div class="board" data-rv style="--i:1">
   <h3>Hoje no buffet</h3>
@@ -466,14 +472,13 @@ footer h3{font:600 .8rem Jost;letter-spacing:.2em;text-transform:uppercase;color
    <p class="wn" id="wn"></p>
   </div>
   <form id="f" novalidate>
-   <div><label for="nome">Seu nome</label><input id="nome" name="nome" autocomplete="name" required><span class="err"></span></div>
-   <div><label for="tel">Seu WhatsApp</label><input id="tel" name="tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="(11) 90000-0000"><span class="err"></span></div>
+   <div class="full"><label for="nome">Seu nome</label><input id="nome" name="nome" autocomplete="given-name" required><span class="err"></span></div>
    <div class="full"><label for="itens">O que você quer pedir</label><textarea id="itens" name="itens" required placeholder="Ex.: 10 pães de queijo e 2 queijadas"></textarea><span class="err"></span>
     <div class="quick" id="quick" aria-label="Adicionar item rápido"></div></div>
    <fieldset class="full" style="border:0;padding:0"><legend style="font-weight:500;font-size:.95rem;margin-bottom:8px">Como prefere</legend>
     <div class="seg"><label><input type="radio" name="modo" value="Retirar na loja" checked>Retirar na loja</label><label><input type="radio" name="modo" value="Entrega">Entrega</label></div></fieldset>
    <div class="full" id="endw" hidden><label for="end">Endereço para entrega</label><input id="end" name="end" autocomplete="street-address"><span class="err"></span></div>
-   <div><label for="hora">Para que horas</label><input id="hora" name="hora" type="time" min="06:30" max="21:30"></div>
+   <div><label for="hora">Para quando</label><select id="hora" name="hora"></select></div>
    <div><label for="obs">Observações</label><input id="obs" name="obs" placeholder="Opcional"></div>
    <div class="full"><button class="btn bmain" type="submit">${WA}Enviar pedido pelo WhatsApp</button></div>
   </form>
@@ -482,7 +487,7 @@ footer h3{font:600 .8rem Jost;letter-spacing:.2em;text-transform:uppercase;color
 
 <section id="avaliacoes" class="tray"><div class="w rv">
  <div data-rv>
-  <span class="kick">Quem vem, volta</span>
+  <span class="kick">Quem vem, volta</span><h2 class="sr">Avaliações dos clientes</h2>
   <div class="score"><span class="big">4,6</span><div>${stars}<small>309 avaliações no Google</small></div></div>
   <p class="lead" style="margin-top:18px">O que mais aparece nas avaliações públicas da casa:</p>
   <div class="tags"><span>Pão de queijo</span><span>Queijada</span><span>Sopas e caldos</span><span>Café</span><span>Atendimento</span></div>
@@ -514,7 +519,7 @@ footer h3{font:600 .8rem Jost;letter-spacing:.2em;text-transform:uppercase;color
  <div class="faq" data-rv>
   <details><summary>Qual é o horário?</summary><p>Das 6h30 às 21h30. Se for vir perto do fechamento, vale chamar no WhatsApp antes.</p></details>
   <details><summary>Vocês entregam?</summary><p>Sim. Você pode pedir pelo iFood ou mandar o pedido pelo WhatsApp e combinar a entrega com a gente.</p></details>
-  <details><summary>Como sei o que tem no buffet hoje?</summary><p>O cardápio do dia fica no quadro desta página e no Instagram @labellafornatta. Se preferir, pergunte pelo WhatsApp.</p></details>
+  <details><summary>Como sei o que tem no buffet hoje?</summary><p>O cardápio do dia fica no quadro desta página e no Instagram @labellafornatta. Se preferir, <a href="#pedir" data-wa="Olá! Qual é o buffet de hoje na La Bella Fornatta?">pergunte pelo WhatsApp</a>.</p></details>
   <details><summary>Onde fica?</summary><p>Na R. Clarisse de Jesus Lázaro Bedeschi, 231A, no Parque São Vicente, em Mauá. Os botões de Google Maps e Waze levam você até a porta.</p></details>
  </div>
 </div></section>
@@ -538,10 +543,11 @@ footer h3{font:600 .8rem Jost;letter-spacing:.2em;text-transform:uppercase;color
  <div class="copy"><p>© 2026 La Bella Fornatta. Página de prévia com conteúdo demonstrativo.</p><p>Site desenvolvido por <a href="https://www.instagram.com/sentiero.ai/" target="_blank" rel="noopener"><strong>Sentiero AI</strong></a></p></div>
 </div></footer>
 
-<div class="mbar" id="mbar"><a class="btn bmain wal" href="#pedir">${WA}WhatsApp</a><a class="btn bline" href="${IFOOD}" target="_blank" rel="noopener">iFood</a></div>
+<nav class="mbar" id="mbar" aria-label="Pedido rápido"><a class="btn bmain wal" href="#pedir">${WA}WhatsApp</a><a class="btn bline" href="${IFOOD}" target="_blank" rel="noopener">iFood</a></nav>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
+(function(){"use strict";
 // CONFIGURAÇÃO: WhatsApp de pedidos com DDI+DDD, só números. O Linktree usa o atalho mywhats.net/fornattabella1;
 // confirmar o número com a Fornatta. Na prévia fica vazio para nenhum teste chegar à loja sem combinar.
 var WHATSAPP_NUMBER = "";
@@ -585,18 +591,19 @@ function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp
 function nowSP(){try{var p={};new Intl.DateTimeFormat("en-US",{timeZone:"America/Sao_Paulo",weekday:"short",hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).formatToParts(new Date()).forEach(function(x){p[x.type]=x.value});return {d:["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].indexOf(p.weekday),m:(+p.hour)*60+(+p.minute)}}catch(e){var n=new Date();return {d:n.getDay(),m:n.getHours()*60+n.getMinutes()}}}
 function mins(h){var a=h.split(":");return a[0]*60+(+a[1])}
 function fmt(h){var a=h.split(":");return (+a[0])+"h"+(a[1]=="00"?"":a[1])}
-var NOW=nowSP(),H=HOURS[NOW.d],open=H&&NOW.m>=mins(H[0])&&NOW.m<mins(H[1]);
+// Não usar nomes globais do navegador: uma variável "open" sobrescrevia window.open e o pedido não abria o WhatsApp.
+var NOW=nowSP(),H=HOURS[NOW.d],isOpen=!!(H&&NOW.m>=mins(H[0])&&NOW.m<mins(H[1]));
 (function(){var st=document.getElementById("status"),sp=st.querySelector("span");
- if(open){st.classList.add("on");sp.textContent="Aberto agora · fecha às "+fmt(H[1])}
+ if(isOpen){st.classList.add("on");sp.textContent="Aberto agora · fecha às "+fmt(H[1])}
  else{var nd=NOW.m<mins(H[0])?H:HOURS[(NOW.d+1)%7];sp.textContent="Fechado agora · abre às "+fmt(nd[0])+(NOW.m<mins(H[0])?"":" amanhã")}
  var DN=["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"];document.getElementById("week").innerHTML=DN.map(function(n,i){return '<i class="'+(i==NOW.d?"today":"")+'">'+n+'</i>'}).join("");
- document.getElementById("hoje-st").textContent=(open?"Aberto agora. ":"")+"Todos os dias da semana";
+ document.getElementById("hoje-st").textContent=(isOpen?"Aberto agora. ":"")+"Todos os dias da semana";
  var D=["domingo","segunda-feira","terça-feira","quarta-feira","quinta-feira","sexta-feira","sábado"];document.getElementById("today").textContent="Exemplo · "+D[NOW.d];
 })();
 
 // Um dia na Fornatta: destaca o momento atual
 (function(){var cards=document.querySelectorAll(".mo"),cur=-1;cards.forEach(function(c,i){if(NOW.m>=+c.dataset.from&&NOW.m<+c.dataset.to)cur=i});
- if(open&&cur>=0)cards[cur].classList.add("is-now")})();
+ if(isOpen&&cur>=0)cards[cur].classList.add("is-now")})();
 
 // Sol no arco: anda conforme a hora do dia em Mauá
 (function(){var sun=document.getElementById("sun");if(!sun)return;var t=Math.max(0,Math.min(1,(NOW.m-390)/(1290-390)));
@@ -622,7 +629,8 @@ document.getElementById("board").innerHTML=BUFFET_HOJE.map(function(x){return '<
 // Pedido rápido: atalhos com itens do cardápio
 var itens=document.getElementById("itens");
 document.getElementById("quick").innerHTML=["Pão de queijo","Queijada","Sopa ou caldo","Beirute","Torta de limão"].map(function(n){return '<button type="button">+ '+n+'</button>'}).join("");
-document.getElementById("quick").onclick=function(e){var b=e.target.closest("button");if(!b)return;var n=b.textContent.slice(2);itens.value=(itens.value.trim()?itens.value.trim()+"\\n":"")+"1 "+n;itens.removeAttribute("aria-invalid");itens.parentNode.querySelector(".err").textContent="";itens.focus();toast(n+" entrou no pedido")};
+document.getElementById("quick").onclick=function(e){var b=e.target.closest("button");if(!b)return;var n=b.textContent.slice(2),ls=itens.value.trim()?itens.value.trim().split("\\n"):[],hit=false;
+ ls=ls.map(function(l){var m=l.match(/^(\\d+)\\s+(.+)$/);if(m&&m[2]==n){hit=true;return (+m[1]+1)+" "+n}return l});if(!hit)ls.push("1 "+n);itens.value=ls.join("\\n");itens.removeAttribute("aria-invalid");itens.parentNode.querySelector(".err").textContent="";itens.focus();toast(n+" entrou no pedido")};
 
 // Menu
 var bur=document.querySelector(".burger"),menu=document.getElementById("menu");
@@ -640,8 +648,18 @@ if("IntersectionObserver" in window){
 
 // WhatsApp
 function wa(text){return "https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(text)}
+function openWA(text){var u=wa(text),w=window.open(u,"_blank");if(w){try{w.opener=null}catch(_){}}else location.href=u}
+// Eventos de conversão: entram no dataLayer se GA4/Tag Manager ou Meta Pixel forem instalados (IDs dependem da Fornatta).
+function track(ev,data){try{(window.dataLayer=window.dataLayer||[]).push(Object.assign({event:ev},data||{}));if(window.fbq&&ev=="pedido_enviado")fbq("track","Contact")}catch(_){}}
+document.addEventListener("click",function(e){var a=e.target.closest("a");if(!a)return;var h=a.getAttribute("href")||"";
+ if(h.indexOf("ifood.com")>-1)track("clique_ifood");else if(h.indexOf("tel:")==0)track("clique_telefone");else if(h.indexOf("google.com/maps")>-1||h.indexOf("waze.com")>-1)track("clique_rota");else if(a.classList.contains("wal"))track("clique_whatsapp");else if(h.indexOf("instagram.com/labellafornatta")>-1)track("clique_instagram")});
+(function(){var sel=document.getElementById("hora"),o=['<option>O quanto antes</option>'];if(isOpen){var a=Math.ceil((NOW.m+30)/30)*30,z=mins(H[1])-30;for(var m=a;m<=z;m+=30){var hh=Math.floor(m/60),mm=m%60;o.push("<option>Hoje, "+hh+"h"+(mm?mm:"")+"</option>")}}
+ o.push("<option>Amanhã (combinar horário)</option>");sel.innerHTML=o.join("")})();
+document.querySelectorAll("[data-wa]").forEach(function(a){a.addEventListener("click",function(e){e.preventDefault();track("clique_whatsapp",{contexto:"buffet"});openWA(a.dataset.wa)})});
 document.querySelectorAll(".wal").forEach(function(a){a.addEventListener("click",function(e){e.preventDefault();var f=document.getElementById("f");f.scrollIntoView({behavior:reduce?"auto":"smooth",block:"center"});setTimeout(function(){document.getElementById("nome").focus({preventScroll:true})},reduce?0:600)})});
-if(!WHATSAPP_NUMBER)document.getElementById("wn").textContent="Prévia: o número de pedidos ainda não foi configurado, então o WhatsApp vai pedir para você escolher o contato.";
+var wn=[];if(!isOpen)wn.push("A loja está fechada agora e abre às "+fmt((NOW.m<mins(H[0])?H:HOURS[(NOW.d+1)%7])[0])+". Você pode deixar o pedido e combinar o horário pela conversa.");
+if(!WHATSAPP_NUMBER)wn.push("Prévia: o número de pedidos ainda não foi configurado, então o WhatsApp vai pedir para você escolher o contato.");
+document.getElementById("wn").textContent=wn.join(" ");
 
 // Formulário
 var form=document.getElementById("f"),endw=document.getElementById("endw");
@@ -652,12 +670,15 @@ form.onsubmit=function(e){
  f.querySelectorAll("[required]").forEach(function(i){var m=i.parentNode.querySelector(".err"),bad=!i.value.trim();m.textContent=bad?"Preencha este campo.":"";if(bad){ok=false;i.setAttribute("aria-invalid","true")}else i.removeAttribute("aria-invalid")});
  if(!ok){toast("Faltam alguns campos");f.querySelector("[aria-invalid=true]").focus();return}
  var modo=f.querySelector("input[name=modo]:checked").value;
- var msg="Olá, La Bella Fornatta! Quero fazer um pedido.\\n\\nNome: "+f.nome.value.trim()+(f.tel.value.trim()?"\\nWhatsApp: "+f.tel.value.trim():"")+"\\n\\nPedido:\\n"+f.itens.value.trim()+"\\n\\n"+modo+(modo=="Entrega"?": "+f.end.value.trim():"")+(f.hora.value?"\\nPara as "+f.hora.value.replace(":","h"):"")+(f.obs.value.trim()?"\\nObservações: "+f.obs.value.trim():"");
- window.open(wa(msg),"_blank","noopener");toast("Abrindo o WhatsApp com o seu pedido");
+ var msg="Olá, La Bella Fornatta! Quero fazer um pedido.\\n\\nNome: "+f.nome.value.trim()+"\\n\\nPedido:\\n"+f.itens.value.trim()+"\\n\\n"+modo+(modo=="Entrega"?": "+f.end.value.trim():"")+"\\nPara: "+f.hora.value+(f.obs.value.trim()?"\\nObservações: "+f.obs.value.trim():"");
+ openWA(msg);track("pedido_enviado",{modo:modo});toast("Abrindo o WhatsApp com o seu pedido");
 };
+})();
 </script>
 </body>
 </html>
 `;
 fs.writeFileSync(path.join(ROOT, "index.html"), html);
+fs.writeFileSync(path.join(ROOT, "robots.txt"), "User-agent: *\nAllow: /\n\nSitemap: " + SITE + "sitemap.xml\n");
+fs.writeFileSync(path.join(ROOT, "sitemap.xml"), '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n <url><loc>' + SITE + '</loc><lastmod>' + new Date().toISOString().slice(0, 10) + '</lastmod></url>\n</urlset>\n');
 console.log("index.html", html.length, "bytes");
