@@ -7,6 +7,8 @@ const C = LBF.C;
 
 // Domínio da prévia na Vercel. CONFIRMAR depois de criar o projeto e regerar (og:url, og:image, canonical).
 const SITE = "https://labellafornatta.vercel.app/";
+// Suba este número sempre que a og-image.png mudar: o WhatsApp guarda a imagem antiga pelo endereço.
+const OG_VER = 2;
 const IFOOD = "https://www.ifood.com.br/delivery/maua-sp/la-bella-fornatta-parque-sao-vicente/b04e8f4f-8357-41e1-bc24-af1fcfe14ce4";
 const INSTAGRAM = "https://www.instagram.com/labellafornatta/";
 const MAPS = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent("Padaria La Bella Fornatta, R. Clarisse de Jesus Lázaro Bedeschi, 231A, Mauá - SP");
@@ -68,8 +70,8 @@ const html = `<!DOCTYPE html>
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:url" content="${SITE}">
-<meta property="og:image" content="${SITE}og-image.png">
-<meta property="og:image:secure_url" content="${SITE}og-image.png">
+<meta property="og:image" content="${SITE}og-image.png?v=${OG_VER}">
+<meta property="og:image:secure_url" content="${SITE}og-image.png?v=${OG_VER}">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -77,13 +79,13 @@ const html = `<!DOCTYPE html>
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="La Bella Fornatta | Padaria e restaurante em Mauá">
 <meta name="twitter:description" content="Do pão da manhã ao caldo da noite. Das 6h30 às 21h30, no Parque São Vicente.">
-<meta name="twitter:image" content="${SITE}og-image.png">
+<meta name="twitter:image" content="${SITE}og-image.png?v=${OG_VER}">
 <meta name="theme-color" content="${C.cacau}">
 <link rel="icon" href="data:image/svg+xml,${encodeURIComponent(LBF.badge('xmlns="http://www.w3.org/2000/svg"'))}">
 <link rel="preload" href="fonts/jost.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/dm-serif-display.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/dm-serif-display-italic.woff2" as="font" type="font/woff2" crossorigin>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Bakery","name":"La Bella Fornatta","description":"Padaria e restaurante","servesCuisine":["Padaria","Brasileira"],"priceRange":"R$ 20-40","address":{"@type":"PostalAddress","streetAddress":"R. Clarisse de Jesus Lázaro Bedeschi, 231A","addressLocality":"Mauá","addressRegion":"SP","postalCode":"09371-067","addressCountry":"BR"},"telephone":"+55-11-2375-9892","url":"${SITE}","image":"${SITE}og-image.png","logo":"${SITE}og-image.png","hasMap":"${MAPS}","menu":"${SITE}#cardapio","openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"06:30","closes":"21:30"}],"potentialAction":{"@type":"OrderAction","target":"${IFOOD}"},"sameAs":["https://www.instagram.com/labellafornatta","https://linktr.ee/labellafornatta"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Bakery","name":"La Bella Fornatta","description":"Padaria e restaurante","servesCuisine":["Padaria","Brasileira"],"priceRange":"R$ 20-40","address":{"@type":"PostalAddress","streetAddress":"R. Clarisse de Jesus Lázaro Bedeschi, 231A","addressLocality":"Mauá","addressRegion":"SP","postalCode":"09371-067","addressCountry":"BR"},"telephone":"+55-11-2375-9892","url":"${SITE}","image":"${SITE}og-image.png?v=${OG_VER}","logo":"${SITE}og-image.png?v=${OG_VER}","hasMap":"${MAPS}","menu":"${SITE}#cardapio","openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"06:30","closes":"21:30"}],"potentialAction":{"@type":"OrderAction","target":"${IFOOD}"},"sameAs":["https://www.instagram.com/labellafornatta","https://linktr.ee/labellafornatta"]}</script>
 <script>document.documentElement.classList.add("js")</script>
 <style>
 @font-face{font-family:Jost;font-style:normal;font-weight:400 600;font-display:swap;src:url(fonts/jost.woff2) format("woff2")}
