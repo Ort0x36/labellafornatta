@@ -1,0 +1,45 @@
+"""Gera og-image.png (1200x630), a imagem de prévia do link no WhatsApp. Uso: python3 assets-src/make_og.py"""
+import pathlib
+from playwright.sync_api import sync_playwright
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+MARCA = (ROOT / "assets-src" / "marca.js").as_uri()
+HTML = """<!DOCTYPE html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Jost:wght@500;600&family=Sacramento&display=swap" rel="stylesheet">
+<script src="MARCA"></script>
+<style>*{margin:0;padding:0;box-sizing:border-box}
+body{width:1200px;height:630px;overflow:hidden;background:#FBF6EE;color:#2B1A15;font-family:Jost,sans-serif;position:relative}
+.seal{position:absolute;left:64px;top:52px;width:150px}
+.l{position:absolute;left:72px;top:232px;width:640px}
+h1{font:400 66px/1.03 'DM Serif Display',serif;letter-spacing:-.01em}
+h1 em{color:#9C5B3B}
+p{font:500 25px/1.4 Jost;color:#6B564C;margin-top:18px}
+.chips{position:absolute;left:72px;bottom:56px;display:flex;gap:12px}
+.chip{display:inline-flex;align-items:center;height:52px;padding:0 24px;border-radius:99px;font:600 21px Jost}
+.c1{border:2px solid #9C5B3B;color:#7A4329}.c2{background:#532E25;color:#F6EBDD}
+.v{position:absolute;right:62px;top:48px;width:390px;height:534px;border-radius:195px 195px 26px 26px;background:#F0E3D0;overflow:hidden;border:1px solid #E6D6C2}
+.v:before{content:"";position:absolute;inset:12px;border-radius:185px 185px 16px 16px;border:1.5px solid #9C5B3B;opacity:.35}
+.sh{position:absolute;left:12%;right:12%;display:flex;justify-content:space-around;align-items:flex-end;border-bottom:2px solid rgba(156,91,59,.5);color:#532E25}
+.sh svg{width:30%}
+.s1{top:28%}.s2{top:50%}
+.ct{position:absolute;left:0;right:0;bottom:0;height:28%;background:#532E25;display:flex;justify-content:center;color:#D6A283}
+.ct:before{content:"";position:absolute;left:0;right:0;top:0;height:6px;background:#B27F66}
+.ct svg{width:36%;margin-top:-18%}
+.wh{position:absolute;bottom:28%;width:44px;height:140px;color:#9C5B3B;opacity:.5}
+</style></head><body>
+<div id="seal"></div>
+<div class="l"><h1>Do pão da manhã <em>ao caldo da noite.</em></h1><p>Padaria e restaurante no Parque São Vicente, em Mauá.</p></div>
+<div class="chips"><span class="chip c1">Das 6h30 às 21h30</span><span class="chip c2">Peça pelo WhatsApp ou iFood</span></div>
+<div class="v" id="v"></div>
+<script>
+document.getElementById('seal').innerHTML=LBF.seal('class="seal"');
+function I(k){return LBF.ill(k,'',"currentColor",2.6).replace(/class="vapor[^"]*"/g,'opacity=".8"')}
+function W(){return '<svg viewBox="0 0 60 120">'+LBF.wheat("currentColor",1.5)+'</svg>'}
+document.getElementById('v').innerHTML='<span class="wh" style="left:6%">'+W()+'</span><span class="wh" style="right:6%;height:116px">'+W()+'</span>'+
+ '<div class="sh s1">'+I('pao')+I('croissant')+I('pao')+'</div><div class="sh s2">'+I('bolo')+I('beirute')+I('croissant')+'</div><div class="ct">'+I('xicara')+'</div>';
+</script></body></html>""".replace("MARCA", MARCA)
+out = ROOT / "assets-src" / "og-image.html"; out.write_text(HTML, encoding="utf-8")
+with sync_playwright() as p:
+    b = p.chromium.launch(); pg = b.new_page(viewport={"width": 1200, "height": 630})
+    pg.goto(out.as_uri()); pg.wait_for_load_state("networkidle"); pg.evaluate("document.fonts.ready"); pg.wait_for_timeout(600)
+    pg.screenshot(path=str(ROOT / "og-image.png")); b.close()
+print("ok", (ROOT / "og-image.png").stat().st_size)
