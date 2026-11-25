@@ -640,7 +640,10 @@ menu.onclick=function(e){if(e.target.closest("a"))closeMenu()};
 document.addEventListener("keydown",function(e){if(e.key=="Escape"&&menu.classList.contains("open")){closeMenu();bur.focus()}});
 if("IntersectionObserver" in window){
  var hdr=document.querySelector("header"),mbar=document.getElementById("mbar");
- new IntersectionObserver(function(es){var off=!es[0].isIntersecting;hdr.classList.toggle("sc",off);mbar.classList.toggle("on",off)},{rootMargin:"-80px 0px 0px 0px"}).observe(document.querySelector(".hero .ctas"));
+ // A barra fixa aparece depois do topo e some quando o formulário de pedido está na tela (ela cobriria os campos).
+ var pastHero=false,atForm=false;function syncBar(){mbar.classList.toggle("on",pastHero&&!atForm)}
+ new IntersectionObserver(function(es){pastHero=!es[0].isIntersecting;hdr.classList.toggle("sc",pastHero);syncBar()},{rootMargin:"-80px 0px 0px 0px"}).observe(document.querySelector(".hero .ctas"));
+ new IntersectionObserver(function(es){atForm=es[0].isIntersecting;syncBar()}).observe(document.querySelector(".order"));
  var links={};menu.querySelectorAll("a:not(.btn)").forEach(function(a){links[a.getAttribute("href").slice(1)]=a});
  var nio=new IntersectionObserver(function(es){es.forEach(function(e){var a=links[e.target.id];if(a)a.setAttribute("aria-current",e.isIntersecting?"true":"false")})},{rootMargin:"-45% 0px -50% 0px"});
  Object.keys(links).forEach(function(id){var s=document.getElementById(id);if(s)nio.observe(s)});
